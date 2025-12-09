@@ -22,15 +22,7 @@ def fetch_wikipedia_page(url: str) -> str:
         requests.HTTPError: If the HTTP request returned an unsuccessful status code.
         requests.RequestException: If there was a network error.
     """
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()
-        return response.text
-    except requests.RequestException as e:
-        raise requests.RequestException(f"Error fetching page from '{url}': {e}")
+    pass
 
 
 def extract_title(soup: BeautifulSoup) -> str:
@@ -43,10 +35,7 @@ def extract_title(soup: BeautifulSoup) -> str:
     Returns:
         str: The title of the page.
     """
-    title_element = soup.find('h1', {'id': 'firstHeading'})
-    if not title_element:
-        raise ValueError("Could not find page title element")
-    return title_element.get_text(strip=True)
+    pass
 
 
 def extract_first_sentence(soup: BeautifulSoup) -> str:
@@ -59,12 +48,7 @@ def extract_first_sentence(soup: BeautifulSoup) -> str:
     Returns:
         str: The first sentence of the first paragraph.
     """
-    first_paragraph = soup.find('p')
-    if not first_paragraph:
-        raise ValueError("Could not find first paragraph element")
-    first_paragraph_text = first_paragraph.get_text(strip=True)
-    first_sentence = first_paragraph_text.split('.')[0] + '.'
-    return first_sentence
+    pass
 
 
 if __name__ == "__main__":
