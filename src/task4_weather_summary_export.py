@@ -17,34 +17,7 @@ def summarize_weather_data(data: List[Dict[str, any]]) -> Dict[str, float]:
     Returns:
         dict: A summary of the key metrics across all days.
     """
-    # Calculate aggregate values using list comprehensions
-    total_max_temp = sum(day["max_temperature"] for day in data)
-    total_min_temp = sum(day["min_temperature"] for day in data)
-    total_precipitation = sum(day["precipitation"] for day in data)
-    total_wind_speed = sum(day["wind_speed"] for day in data)
-    total_humidity = sum(day["humidity"] for day in data)
-
-    # Count specific conditions using list comprehensions
-    hot_days = sum(1 for day in data if day["max_temperature"] > 30)
-    windy_days = sum(1 for day in data if day["wind_speed"] > 15)
-    rainy_days = sum(1 for day in data if day["precipitation"] > 0)
-
-    # Calculate the number of days
-    count = len(data)
-
-    # Prepare the summary dictionary
-    summary = {
-        "average_max_temp": total_max_temp / count,
-        "average_min_temp": total_min_temp / count,
-        "total_precipitation": total_precipitation,
-        "average_wind_speed": total_wind_speed / count,
-        "average_humidity": total_humidity / count,
-        "hot_days": hot_days,
-        "windy_days": windy_days,
-        "rainy_days": rainy_days,
-    }
-
-    return summary
+    pass
 
 
 def export_to_csv(data: List[Dict[str, any]], file: Union[str, TextIO]) -> None:
@@ -64,30 +37,7 @@ def export_to_csv(data: List[Dict[str, any]], file: Union[str, TextIO]) -> None:
         Args:
             writer (csv.DictWriter): The CSV writer object.
         """
-        for day in data:
-            writer.writerow({
-                "Date": day["date"],
-                "Max Temperature": day["max_temperature"],
-                "Min Temperature": day["min_temperature"],
-                "Precipitation": day["precipitation"],
-                "Wind Speed": day["wind_speed"],
-                "Humidity": day["humidity"],
-                "Weather Description": day["weather_description"],
-                "Is Hot Day": day["max_temperature"] > 30,
-                "Is Windy Day": day["wind_speed"] > 15,
-                "Is Rainy Day": day["precipitation"] > 0
-            })
-
-    # Determine whether 'file' is a filename or a file-like object
-    if isinstance(file, str):
-        with open(file, 'w', newline='') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=headers)
-            writer.writeheader()
-            write_data(writer)
-    else:
-        writer = csv.DictWriter(file, fieldnames=headers)
-        writer.writeheader()
-        write_data(writer)
+        pass
 
 
 if __name__ == "__main__":
