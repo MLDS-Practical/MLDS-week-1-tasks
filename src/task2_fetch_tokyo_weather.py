@@ -22,22 +22,7 @@ def fetch_weather_data() -> Dict[str, any]:
     url = ("https://api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917"
            "&daily=temperature_2m_max&timezone=Asia/Tokyo")
     
-    try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()  # Check that the request was successful
-
-        # Parse the JSON response
-        data = response.json()
-
-        # Extract the date and maximum temperature
-        date = data['daily']['time'][0]
-        max_temperature = data['daily']['temperature_2m_max'][0]
-
-        return {"date": date, "max_temperature": max_temperature}
-    except requests.RequestException as e:
-        raise requests.RequestException(f"Error fetching weather data: {e}")
-    except KeyError as e:
-        raise KeyError(f"Unexpected API response format. Missing key: {e}")
+    pass
 
 
 if __name__ == "__main__":
