@@ -17,29 +17,7 @@ def parse_weather_xml(xml_file: str) -> List[Dict[str, any]]:
         FileNotFoundError: If the XML file does not exist.
         ET.ParseError: If the XML file is malformed.
     """
-    try:
-        tree = ET.parse(xml_file)
-        root = tree.getroot()
-
-        parsed_data = []
-        for day in root.findall('day'):
-            date = day.find('date').text
-            temperature = day.find('temperature').text
-            humidity = day.find('humidity').text
-            precipitation = day.find('precipitation').text
-
-            parsed_data.append({
-                "date": date,
-                "temperature": float(temperature),
-                "humidity": int(humidity),
-                "precipitation": float(precipitation)
-            })
-
-        return parsed_data
-    except FileNotFoundError:
-        raise FileNotFoundError(f"The XML file '{xml_file}' was not found.")
-    except ET.ParseError as e:
-        raise ET.ParseError(f"Error parsing XML file '{xml_file}': {e}")
+    pass
 
 
 def save_to_csv(data: List[Dict[str, any]], filename: str = "parsed_weather_data.csv") -> None:
@@ -53,20 +31,7 @@ def save_to_csv(data: List[Dict[str, any]], filename: str = "parsed_weather_data
     Raises:
         IOError: If there is an error writing to the file.
     """
-    headers = ["Date", "Temperature", "Humidity", "Precipitation"]
-    try:
-        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=headers)
-            writer.writeheader()
-            for entry in data:
-                writer.writerow({
-                    "Date": entry["date"],
-                    "Temperature": entry["temperature"],
-                    "Humidity": entry["humidity"],
-                    "Precipitation": entry["precipitation"]
-                })
-    except IOError as e:
-        raise IOError(f"Error writing to file '{filename}': {e}")
+    pass
 
 
 if __name__ == "__main__":
